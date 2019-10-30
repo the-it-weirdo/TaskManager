@@ -1,23 +1,30 @@
 package com.kingominho.taskmanager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
 public class ViewCategory extends AppCompatActivity {
 
-    private static final String CATEGORY_KEY = "CATEGORY_KEY";
-    private static final String USER_KEY = "USER_KEY";
-    private static final String TASK_KEY = "TASK_KEY";
+    public static final String CATEGORY_KEY = "CATEGORY_KEY";
+    public static final String USER_NAME_KEY = "USER_NAME_KEY";
+    public static final String USER_ID_KEY = "USER_ID_KEY";
+    public static final String TASK_KEY = "TASK_KEY";
 
     private static final int ADD_TASK_REQUEST = 1;
 
@@ -26,6 +33,11 @@ public class ViewCategory extends AppCompatActivity {
     private ImageView categoryIconImageView;
     private TextView textViewCategoryTitle;
     private TextView textViewTaskRemainingCount;
+    private FloatingActionButton floatingActionButtonAddTask;
+
+    int userId;
+    String category;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +56,11 @@ public class ViewCategory extends AppCompatActivity {
         textViewCategoryTitle = findViewById(R.id.categoryName);
         textViewTaskRemainingCount = findViewById(R.id.taskRemainingCount);
 
-        int userId = 1;
-        String category = "Home";
+        floatingActionButtonAddTask = findViewById(R.id.addTaskFab);
+
+        userId = 1;
+        category = "Home";
+        userName = "Test";
 
         textViewCategoryTitle.setText(category);
         if(category.equals("Work"))
@@ -70,7 +85,8 @@ public class ViewCategory extends AppCompatActivity {
             @Override
             public void onChanged(List<Task> tasks) {
                 mTaskAdapterRemaining.submitList(tasks);
-                int remaining = mTaskAdapterRemaining.getItemCount();
+                //int remaining = mTaskAdapterRemaining.getItemCount();
+                int remaining = tasks.size();
                 String text = remaining + " tasks remaining.";
                 textViewTaskRemainingCount.setText(text);
             }
@@ -119,5 +135,42 @@ public class ViewCategory extends AppCompatActivity {
             }
         });
 
+        floatingActionButtonAddTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTask();
+            }
+        });
+
+    }
+
+    private void addTask()
+    {
+        Intent intent = new Intent(ViewCategory.this, AddTaskActivity.class);
+        intent.putExtra(USER_ID_KEY, userId);
+        intent.putExtra(USER_NAME_KEY, userName);
+        intent.putExtra(CATEGORY_KEY, category);
+
+        startActivityForResult(intent, ADD_TASK_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK)
+        {
+            String title = data.getStringExtra(AddTaskActivity.NEW_TASK_TITLE_KEY);
+
+            userId = data.getIntExtra(USER_ID_KEY, -1);
+            category = data.getStringExtra(CATEGORY_KEY);
+            userName = data.getStringExtra(USER_NAME_KEY);
+
+            Task task = new Task(title, 0, userId, category);
+            taskViewModel.insert(task);
+
+            //Toast.makeText(getApplicationContext(), "Task created.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(getCurrentFocus(), "Task created!", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

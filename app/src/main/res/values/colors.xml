@@ -16,4 +16,7 @@
     <color name="color3">#59717c</color>
     <color name="color4">#424549</color>
     <color name="color5">#00B1FF</color>
+
+    <color name="color_home">#EC9614</color>
+    <color name="color_work">#00B1FF</color>
 </resources>
