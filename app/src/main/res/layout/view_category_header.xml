@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_rl_view_category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:fillViewport="true"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/categoryIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_work_32b1c4_24dp" />
+
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryIcon"
+        android:layout_toEndOf="@id/categoryIcon"
+        android:layout_toRightOf="@id/categoryIcon"
+        android:text="Work"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/taskRemainingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryName"
+        android:layout_alignStart="@id/categoryName"
+        android:layout_alignLeft="@id/categoryName"
+        android:text="50 tasks remaining"
+        android:textSize="15sp" />
+
+</RelativeLayout>
