@@ -97,6 +97,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 intent.putExtra(ViewCategory.USER_ID_KEY, id);
             }
 
+            intent.putExtra(ViewCategory.USER_NAME_KEY, username);
             intent.putExtra(ViewCategory.CATEGORY_KEY, category);
             intent.putExtra(NEW_TASK_TITLE_KEY, title);
 

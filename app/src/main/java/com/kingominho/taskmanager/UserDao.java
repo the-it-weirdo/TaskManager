@@ -23,4 +23,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE userEmail = :userEmail AND password = :password")
     LiveData<List<User>> getUser(String userEmail, String password);
+
+    @Query("SELECT * FROM user_table WHERE user_table.userEmail LIKE :userEmail")
+    User getUser(String userEmail);
 }

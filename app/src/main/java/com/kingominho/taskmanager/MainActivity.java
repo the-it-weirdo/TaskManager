@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = new Intent(this, SwipeMenuActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }

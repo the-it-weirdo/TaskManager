@@ -22,6 +22,7 @@ public abstract class DataBase extends RoomDatabase {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     DataBase.class, "task_manager_database")
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .addCallback(roomCallback)
                     .build();
         }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +43,24 @@ public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_menu);
 
-        userId = 1;
-        userName = "Test";
-        greetings = "Hello, ";
+        Intent intent = getIntent();
+
+        if(intent != null)
+        {
+            greetings = "Hello from Login, ";
+            userName = intent.getStringExtra(ViewCategory.USER_NAME_KEY);
+            userId = intent.getIntExtra(ViewCategory.USER_ID_KEY, -1);
+        }
+        else {
+            userId = 1;
+            userName = "Test";
+            greetings = "Hello, ";
+        }
+        if(userId == -1)
+        {
+            Toast.makeText(getApplicationContext(), "Invalid user id!!\nResetting user id to 1.", Toast.LENGTH_SHORT).show();
+            userId = 1;
+        }
 
         relativeLayoutParentLayout = findViewById(R.id.relativeLayout);
         textViewUserName = findViewById(R.id.userName);

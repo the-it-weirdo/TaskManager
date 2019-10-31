@@ -40,5 +40,17 @@ public class UserViewModel extends AndroidViewModel {
         return user;
     }
 
+    public boolean checkValidLogin(String username, String password)
+    {
+        return userRepository.isValidUser(username, password);
+    }
+
+    public int getUserId(String email) {
+        return userRepository.getUserId(email);
+    }
+
+    public String getUserName(String email) {
+        return userRepository.getUserName(email);
+    }
 
 }

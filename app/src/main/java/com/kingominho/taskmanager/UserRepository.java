@@ -40,6 +40,27 @@ public class UserRepository {
         return user;
     }
 
+    public boolean isValidUser(String email, String password)
+    {
+        User user = userDao.getUser(email);
+        if(user == null)
+        {
+            return false;
+        }
+        return user.getPassword().equals(password);
+    }
+
+    public int getUserId(String email)
+    {
+        User user = userDao.getUser(email);
+        return user.getId();
+    }
+
+    public String getUserName(String email) {
+        User user = userDao.getUser(email);
+        return  user.getUserName();
+    }
+
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
 
         private UserDao userDao;
