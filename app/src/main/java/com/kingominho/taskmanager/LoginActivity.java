@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
             String userName = userViewModel.getUserName(userEmail);
             int userId = userViewModel.getUserId(userEmail);
 
+
+            getSharedPreferences(MainActivity.PREFERENCE_NAME_KEY, MODE_PRIVATE).edit()
+                    .putBoolean(MainActivity.LOGGED_IN_KEY, true)
+                    .putInt(MainActivity.USER_ID_KEY, userId)
+                    .putString(MainActivity.USER_NAME_KEY, userName)
+                    .apply();
+
             Intent intent = new Intent(getApplicationContext(), SwipeMenuActivity.class);
             intent.putExtra(ViewCategory.USER_ID_KEY, userId);
             intent.putExtra(ViewCategory.USER_NAME_KEY, userName);

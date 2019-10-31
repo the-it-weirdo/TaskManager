@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -17,47 +18,67 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAdapter.AdapterOnCardClickListener{
+public class SwipeMenuActivity extends AppCompatActivity implements SwipeMenuAdapter.AdapterOnCardClickListener {
 
     ViewPager viewPager;
     SwipeMenuAdapter swipeMenuAdapter;
     List<SwipeMenuItem> models;
     Integer[] colors = null;
-    ArgbEvaluator  argbEvaluator = new ArgbEvaluator();
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     private RelativeLayout relativeLayoutParentLayout;
     private TextView textViewUserName;
     private TextView textViewGreetings;
+    private  TextView textViewCurrentDay;
     private ImageButton imageButtonLogOutButton;
 
     private int noOfCategories;
     private int userId;
     private String userName;
     private String greetings;
+    //private String currentDay;
+    private String currentDate;
+    private String currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_menu);
 
+
+        currentDate = new SimpleDateFormat("EEEE dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        currentTime = new SimpleDateFormat("HH:MM", Locale.getDefault()).format(new Date());
+
+        String[] split = currentTime.split(":");
+        int hour = Integer.parseInt(split[0]);
+        int minutes = Integer.parseInt(split[1]);
+
+        if (hour >= 6 && hour < 12) {
+            greetings = "Good morning,";
+        } else if (hour >= 12 && hour < 14) {
+            greetings = "Good noon,";
+        } else if (hour >= 14 && hour <= 23) {
+            greetings = "Good evening,";
+        } else if (hour >= 0 && hour < 6) {
+            greetings = "Hello night crawler,";
+        }
+
         Intent intent = getIntent();
 
-        if(intent != null)
-        {
-            greetings = "Hello from Login, ";
+        if (intent != null) {
             userName = intent.getStringExtra(ViewCategory.USER_NAME_KEY);
             userId = intent.getIntExtra(ViewCategory.USER_ID_KEY, -1);
-        }
-        else {
+        } else {
             userId = 1;
             userName = "Test";
-            greetings = "Hello, ";
         }
-        if(userId == -1)
-        {
+        if (userId == -1) {
             Toast.makeText(getApplicationContext(), "Invalid user id!!\nResetting user id to 1.", Toast.LENGTH_SHORT).show();
             userId = 1;
         }
@@ -65,8 +86,10 @@ public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAd
         relativeLayoutParentLayout = findViewById(R.id.relativeLayout);
         textViewUserName = findViewById(R.id.userName);
         textViewGreetings = findViewById(R.id.greetings);
+        textViewCurrentDay = findViewById(R.id.currentDay);
         imageButtonLogOutButton = findViewById(R.id.logout_button);
 
+        textViewCurrentDay.setText(currentDate);
         textViewGreetings.setText(greetings);
         textViewUserName.setText(userName);
 
@@ -86,16 +109,16 @@ public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAd
         //SwipeMenuItem(int icon, String categoryTitle, String taskRemaining)
         String appendString = " tasks remaining.";
         models = new ArrayList<>();
-        for (int i = 0; i < noOfCategories ; i++) {
+        for (int i = 0; i < noOfCategories; i++) {
             models.add(new SwipeMenuItem(iconImageIDs[i], categoryNames[i],
                     appendString));
         }
 
-        Log.d("Models created.", models.size()+".");
+        Log.d("Models created.", models.size() + ".");
 
         swipeMenuAdapter = new SwipeMenuAdapter(models, this);
 
-        Log.d("Adapter created.", swipeMenuAdapter.getCount()+".");
+        Log.d("Adapter created.", swipeMenuAdapter.getCount() + ".");
 
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(swipeMenuAdapter);
@@ -130,8 +153,7 @@ public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAd
                                     colors[position + 1]
                             )
                     );
-                    if(positionOffset==0)
-                    {
+                    if (positionOffset == 0) {
                         relativeLayoutParentLayout.setBackground(gradients[position]);
                     }
                 } else {
@@ -152,6 +174,25 @@ public class SwipeMenuActivity extends AppCompatActivity implements  SwipeMenuAd
             }
         });
 
+        imageButtonLogOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOut();
+            }
+        });
+
+    }
+
+    private void logOut() {
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREFERENCE_NAME_KEY, MODE_PRIVATE);
+        sharedPreferences.edit()
+                .remove(MainActivity.USER_ID_KEY)
+                .remove(MainActivity.USER_NAME_KEY)
+                .putBoolean(MainActivity.LOGGED_IN_KEY, false)
+                .apply();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
