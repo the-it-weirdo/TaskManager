@@ -85,8 +85,8 @@ public class AddTaskActivity extends AppCompatActivity {
 
         if (title.trim().isEmpty()) {
             /*TODO:Following logic clashing with OnTextChanged. Check */
-            editTextNewTaskTitle.setTextColor(Color.RED);
-            editTextNewTaskTitle.setText("Field cannot be empty!!");
+            //editTextNewTaskTitle.setTextColor(Color.RED);
+            editTextNewTaskTitle.setError("Field cannot be empty!!");
         } else {
 
             Intent intent = new Intent();

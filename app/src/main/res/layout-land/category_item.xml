@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="20dp"
+        app:cardCornerRadius="30dp">
+
+        <RelativeLayout
+            android:id="@+id/parent_rl"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/categoryIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_person_f5a110_24dp"
+                android:transitionName="categoryIcon" />
+
+            <TextView
+                android:id="@+id/categoryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/categoryTaskRemaining"
+                android:layout_margin="20dp"
+                android:gravity="end"
+                android:text="Home"
+                android:textAlignment="viewEnd"
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                android:transitionName="categoryName" />
+
+            <TextView
+                android:id="@+id/categoryTaskRemaining"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="end"
+                android:text="50 task remaining"
+                android:textAlignment="viewEnd"
+                android:textSize="15sp"
+                android:transitionName="tasksRemaining" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

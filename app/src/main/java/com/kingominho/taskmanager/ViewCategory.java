@@ -44,6 +44,19 @@ public class ViewCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_category);
 
+        Intent intent = getIntent();
+
+        if (intent != null) {
+            userId = intent.getIntExtra(ViewCategory.USER_ID_KEY, 1);
+            userName = intent.getStringExtra(ViewCategory.USER_NAME_KEY);
+            category = intent.getStringExtra(ViewCategory.CATEGORY_KEY);
+        }
+        else {
+            userId = 1;
+            userName = "Test";
+            category = "Home";
+        }
+
         RecyclerView mRecyclerViewRemaining = findViewById(R.id.taskRemainingRecycler);
         RecyclerView mRecyclerViewCompleted = findViewById(R.id.taskCompletedRecycler);
         mRecyclerViewRemaining.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -58,9 +71,9 @@ public class ViewCategory extends AppCompatActivity {
 
         floatingActionButtonAddTask = findViewById(R.id.addTaskFab);
 
-        userId = 1;
+        /*userId = 1;
         category = "Home";
-        userName = "Test";
+        userName = "Test";*/
 
         textViewCategoryTitle.setText(category);
         if(category.equals("Work"))
@@ -173,4 +186,5 @@ public class ViewCategory extends AppCompatActivity {
             Snackbar.make(getCurrentFocus(), "Task created!", Snackbar.LENGTH_SHORT).show();
         }
     }
+
 }
