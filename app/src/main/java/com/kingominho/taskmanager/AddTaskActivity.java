@@ -1,7 +1,9 @@
 package com.kingominho.taskmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -84,10 +86,14 @@ public class AddTaskActivity extends AppCompatActivity {
         String title = editTextNewTaskTitle.getText().toString();
 
         if (title.trim().isEmpty()) {
-            /*TODO:Following logic clashing with OnTextChanged. Check */
             //editTextNewTaskTitle.setTextColor(Color.RED);
             editTextNewTaskTitle.setError("Field cannot be empty!!");
         } else {
+
+            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                    this,
+                    imageButtonAddTaskButton,
+                    "ADD_TASK_BUTTON");
 
             Intent intent = new Intent();
 
@@ -100,6 +106,7 @@ public class AddTaskActivity extends AppCompatActivity {
             intent.putExtra(ViewCategory.USER_NAME_KEY, username);
             intent.putExtra(ViewCategory.CATEGORY_KEY, category);
             intent.putExtra(NEW_TASK_TITLE_KEY, title);
+            intent.putExtras(activityOptions.toBundle());
 
             setResult(RESULT_OK, intent);
             finish();

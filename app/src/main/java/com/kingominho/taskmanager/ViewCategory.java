@@ -2,11 +2,13 @@ package com.kingominho.taskmanager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -159,10 +161,15 @@ public class ViewCategory extends AppCompatActivity {
 
     private void addTask()
     {
+        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                this,
+                floatingActionButtonAddTask,
+                "ADD_TASK_BUTTON");
         Intent intent = new Intent(ViewCategory.this, AddTaskActivity.class);
         intent.putExtra(USER_ID_KEY, userId);
         intent.putExtra(USER_NAME_KEY, userName);
         intent.putExtra(CATEGORY_KEY, category);
+        intent.putExtras(activityOptions.toBundle());
 
         startActivityForResult(intent, ADD_TASK_REQUEST);
     }

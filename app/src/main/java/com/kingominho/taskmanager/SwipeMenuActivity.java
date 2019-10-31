@@ -35,7 +35,6 @@ public class SwipeMenuActivity extends AppCompatActivity implements SwipeMenuAda
     private RelativeLayout relativeLayoutParentLayout;
     private TextView textViewUserName;
     private TextView textViewGreetings;
-    private  TextView textViewCurrentDay;
     private ImageButton imageButtonLogOutButton;
 
     private int noOfCategories;
@@ -52,9 +51,8 @@ public class SwipeMenuActivity extends AppCompatActivity implements SwipeMenuAda
         setContentView(R.layout.activity_swipe_menu);
 
 
-        currentDate = new SimpleDateFormat("EEEE dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        //setting greetings
         currentTime = new SimpleDateFormat("HH:MM", Locale.getDefault()).format(new Date());
-
         String[] split = currentTime.split(":");
         int hour = Integer.parseInt(split[0]);
         int minutes = Integer.parseInt(split[1]);
@@ -86,10 +84,8 @@ public class SwipeMenuActivity extends AppCompatActivity implements SwipeMenuAda
         relativeLayoutParentLayout = findViewById(R.id.relativeLayout);
         textViewUserName = findViewById(R.id.userName);
         textViewGreetings = findViewById(R.id.greetings);
-        textViewCurrentDay = findViewById(R.id.currentDay);
         imageButtonLogOutButton = findViewById(R.id.logout_button);
 
-        textViewCurrentDay.setText(currentDate);
         textViewGreetings.setText(greetings);
         textViewUserName.setText(userName);
 

@@ -97,6 +97,7 @@
 
     <ImageButton
         android:id="@+id/addTaskButton"
+        android:transitionName="ADD_TASK_BUTTON"
         style="@android:style/Widget.Material.ImageButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
