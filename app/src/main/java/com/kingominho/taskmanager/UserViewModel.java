@@ -45,6 +45,11 @@ public class UserViewModel extends AndroidViewModel {
         return userRepository.isValidUser(username, password);
     }
 
+    public boolean isDuplicateUser(String userName)
+    {
+        return userRepository.isDuplicateUser(userName);
+    }
+
     public int getUserId(String email) {
         return userRepository.getUserId(email);
     }
