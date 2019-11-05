@@ -67,18 +67,22 @@ public class SignUpActivity extends AppCompatActivity {
         boolean flag = true;
         if (name.isEmpty()) {
             userName.setError("Please enter your name!");
+            userName.requestFocus();
             flag = false;
         }
         if (email.isEmpty()) {
             userEmail.setError("Please enter your Email!");
+            userEmail.requestFocus();
             flag = false;
         }
         if (password.isEmpty()) {
             userRePassword.setError("Please create a password!");
+            userRePassword.requestFocus();
             flag = false;
         }
         if (rePass.isEmpty()) {
             userRePassword.setError("Please re-enter your password!");
+            userRePassword.requestFocus();
             flag = false;
         }
 
@@ -88,14 +92,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (!password.equals(rePass)) {
             userRePassword.setError("Passwords doesn't match!");
-            userRePassword.setError("Passwords doesn't match!");
+            userRePassword.requestFocus();
+            //userRePassword.setError("Passwords doesn't match!");
             return;
         }
 
         String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:" +
                 "[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
-        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%.!,^&+=])(?=\\S+$).{8,}$";
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%.*!,^&+=])(?=\\S+$).{8,}$";
 
         String nameRegex = "^[\\p{L} .'-]+$";
 
@@ -110,16 +115,19 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (!nameMatcher.matches()) {
             userName.setError("Alphabets only!");
+            userName.requestFocus();
             flag = false;
         }
         if (!matcherEmail.matches()) {
             userEmail.setError("Please enter a valid Email!");
+            userEmail.requestFocus();
             flag = false;
         }
         if (!matcherPassword.matches()) {
             userPassword.setError("Please enter a valid password." + "\n" + "" +
                     "Your password should contain at least 1 number, 1 capital letter, 1 small letter" + "\n" +
-                    " and 1 special character. Minimum password length should be 8 characters.");
+                    " and 1 special character (@ # $ % . * ! , ^ & + =). Minimum password length should be 8 characters.");
+            userPassword.requestFocus();
             flag = false;
         }
 

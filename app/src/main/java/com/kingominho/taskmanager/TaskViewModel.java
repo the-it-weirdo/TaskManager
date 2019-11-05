@@ -21,6 +21,8 @@ public class TaskViewModel extends AndroidViewModel {
         taskRepository = new TaskRepository(application);
     }
 
+    //TaskViewModel.setUserAndCategory(int userId, String category) must follow
+    //immediately after initialisation of TaskViewModel.
     public void setUserAndCategory(int userId, String category) {
         taskRepository.setUserIdAndCategory(userId, category);
         tasks = taskRepository.getAllTasks();

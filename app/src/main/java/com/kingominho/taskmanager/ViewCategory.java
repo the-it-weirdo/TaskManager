@@ -93,6 +93,8 @@ public class ViewCategory extends AppCompatActivity {
         mRecyclerViewRemaining.setAdapter(mTaskAdapterRemaining);
         mRecyclerViewCompleted.setAdapter(mTaskAdapterCompleted);
 
+        //TaskViewModel.setUserAndCategory(int userId, String category) must follow
+        //immediately after initialisation of TaskViewModel.
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
         taskViewModel.setUserAndCategory(userId, category);
 

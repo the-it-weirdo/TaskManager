@@ -68,10 +68,12 @@ public class LoginActivity extends AppCompatActivity {
 
         if (userEmail.isEmpty()) {
             uName.setError("Please enter you Email!");
+            uName.requestFocus();
             return;
         }
         if (password.isEmpty()) {
             uPass.setError("Please enter your Password!");
+            uPass.requestFocus();
             return;
         }
 
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Password should contain at least 1 number, 1 capital letter, 1 small letter
         //and 1 special character. Minimum password length should be 8 characters.
-        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%.!,^&+=])(?=\\S+$).{8,}$";
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%.*!,^&+=])(?=\\S+$).{8,}$";
 
         Pattern patternEmail = Pattern.compile(emailRegex);
         Pattern patternPassword = Pattern.compile(passwordRegex);
@@ -92,11 +94,13 @@ public class LoginActivity extends AppCompatActivity {
         if (!matcherEmail.matches()) {
             //
             uName.setError("Invalid Email! Please enter a valid Email.");
+            uName.requestFocus();
             return;
         }
         if (!matcherPassword.matches()) {
             //
             uPass.setError("Not a valid password!");
+            uPass.requestFocus();
             return;
         }
 
