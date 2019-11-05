@@ -60,7 +60,10 @@ public class SwipeMenuAdapter extends PagerAdapter {
 
         categoryIcon.setImageResource(models.get(position).getIcon());
         categoryTitle.setText(models.get(position).getCategoryTitle());
-        categoryTaskRemaining.setText(models.get(position).getTaskRemaining());
+
+        /*TODO: fix task remaining*/
+        //ignoring this view as getTaskRemaining requires changing database schema.
+        categoryTaskRemaining.setText("");
 
         //ViewCompat.setTransitionName(layout, categoryTitle.getText().toString());
 
