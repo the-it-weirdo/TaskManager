@@ -24,8 +24,7 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.TaskHolder> {
         super(DIFF_CALLBACK);
     }
 
-    public Task getTaskAt(int position)
-    {
+    public Task getTaskAt(int position) {
         return getItem(position);
     }
 
@@ -60,7 +59,7 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.TaskHolder> {
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
         Task currentItem = getItem(position);
 
-        boolean isCompleted = currentItem.getIsCompleted()==1;
+        boolean isCompleted = currentItem.getIsCompleted() == 1;
 
         holder.textViewTaskTitle.setText(currentItem.getTitle());
         if (isCompleted) {
@@ -88,7 +87,7 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.TaskHolder> {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if(mListener != null && position != RecyclerView.NO_POSITION)
+                    if (mListener != null && position != RecyclerView.NO_POSITION)
                         mListener.OnDeleteButtonPressed(getItem(position));
                 }
             });
@@ -97,16 +96,16 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.TaskHolder> {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int position = getAdapterPosition();
-                    if(mListener != null && position != RecyclerView.NO_POSITION)
+                    if (mListener != null && position != RecyclerView.NO_POSITION)
                         mListener.OnCheckBoxChanged(getItem(position), checkBoxTaskIsCompleted.isChecked());
                 }
             });
         }
     }
 
-    public interface OnTaskInteractionListener
-    {
+    public interface OnTaskInteractionListener {
         void OnDeleteButtonPressed(Task task);
+
         void OnCheckBoxChanged(Task task, boolean isChecked);
     }
 

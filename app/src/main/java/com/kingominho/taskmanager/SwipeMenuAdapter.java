@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -71,8 +72,7 @@ public class SwipeMenuAdapter extends PagerAdapter {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mAdapterOnCardClickListener!=null)
-                {
+                if (mAdapterOnCardClickListener != null) {
                     mAdapterOnCardClickListener.onCardClick(models.get(position).getCategoryTitle());
                 }
                 /*Intent intent = new Intent(context, DetailsActivity.class);
@@ -89,11 +89,10 @@ public class SwipeMenuAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
-    public interface AdapterOnCardClickListener
-    {
+    public interface AdapterOnCardClickListener {
         void onCardClick(String param);
     }
 }

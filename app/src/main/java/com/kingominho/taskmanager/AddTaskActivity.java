@@ -43,8 +43,7 @@ public class AddTaskActivity extends AppCompatActivity {
         if (intent != null) {
             username = intent.getStringExtra(ViewCategory.USER_NAME_KEY);
             category = intent.getStringExtra(ViewCategory.CATEGORY_KEY);
-        }
-        else {
+        } else {
             username = "Test";
             category = "Home";
         }

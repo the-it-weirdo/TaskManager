@@ -52,8 +52,7 @@ public class ViewCategory extends AppCompatActivity {
             userId = intent.getIntExtra(ViewCategory.USER_ID_KEY, 1);
             userName = intent.getStringExtra(ViewCategory.USER_NAME_KEY);
             category = intent.getStringExtra(ViewCategory.CATEGORY_KEY);
-        }
-        else {
+        } else {
             userId = 1;
             userName = "Test";
             category = "Home";
@@ -78,16 +77,11 @@ public class ViewCategory extends AppCompatActivity {
         userName = "Test";*/
 
         textViewCategoryTitle.setText(category);
-        if(category.equals("Work"))
-        {
+        if (category.equals("Work")) {
             categoryIconImageView.setImageDrawable(getDrawable(R.drawable.ic_work_32b1c4_24dp));
-        }
-        else if(category.equals("Home"))
-        {
+        } else if (category.equals("Home")) {
             categoryIconImageView.setImageDrawable(getDrawable(R.drawable.ic_person_f5a110_24dp));
         }
-
-
 
 
         mRecyclerViewRemaining.setAdapter(mTaskAdapterRemaining);
@@ -131,7 +125,7 @@ public class ViewCategory extends AppCompatActivity {
 
             @Override
             public void OnCheckBoxChanged(Task task, boolean isChecked) {
-                int isCompleted = isChecked?1:0;
+                int isCompleted = isChecked ? 1 : 0;
                 task.setIsCompleted(isCompleted);
                 taskViewModel.update(task);
                 //Toast.makeText(getApplicationContext(), String.valueOf(mTaskAdapterRemaining.getItemCount()-1), Toast.LENGTH_SHORT).show();
@@ -146,7 +140,7 @@ public class ViewCategory extends AppCompatActivity {
 
             @Override
             public void OnCheckBoxChanged(Task task, boolean isChecked) {
-                int isCompleted = isChecked?1:0;
+                int isCompleted = isChecked ? 1 : 0;
                 task.setIsCompleted(isCompleted);
                 taskViewModel.update(task);
             }
@@ -161,8 +155,7 @@ public class ViewCategory extends AppCompatActivity {
 
     }
 
-    private void addTask()
-    {
+    private void addTask() {
         ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(
                 this,
                 floatingActionButtonAddTask,
@@ -180,8 +173,7 @@ public class ViewCategory extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK)
-        {
+        if (requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddTaskActivity.NEW_TASK_TITLE_KEY);
 
             userId = data.getIntExtra(USER_ID_KEY, -1);

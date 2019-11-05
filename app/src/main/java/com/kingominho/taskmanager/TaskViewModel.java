@@ -15,8 +15,7 @@ public class TaskViewModel extends AndroidViewModel {
     private LiveData<List<Task>> tasksIsCompletedTrue;
     private LiveData<List<Task>> tasksIsCompletedFalse;
 
-    public TaskViewModel(@NonNull Application application)
-    {
+    public TaskViewModel(@NonNull Application application) {
         super(application);
         taskRepository = new TaskRepository(application);
     }
@@ -30,18 +29,15 @@ public class TaskViewModel extends AndroidViewModel {
         tasksIsCompletedFalse = taskRepository.getAllisCompletedFalseTasks();
     }
 
-    public void insert(Task task)
-    {
+    public void insert(Task task) {
         taskRepository.insert(task);
     }
 
-    public void update(Task task)
-    {
+    public void update(Task task) {
         taskRepository.update(task);
     }
 
-    public void delete(Task task)
-    {
+    public void delete(Task task) {
         taskRepository.delete(task);
     }
 

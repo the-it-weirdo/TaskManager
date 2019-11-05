@@ -130,17 +130,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == SIGN_UP_REQUEST && resultCode == RESULT_OK)
-        {
+        if (requestCode == SIGN_UP_REQUEST && resultCode == RESULT_OK) {
             String email = data.getStringExtra(USER_EMAIL_KEY);
             String pass = data.getStringExtra(USER_P_KEY);
 
             uName.setText(email);
             uPass.setText(pass);
             loginFunction();
-        }
-        else
-        {
+        } else {
             Toast.makeText(getApplicationContext(), "No new account created.", Toast.LENGTH_SHORT).show();
         }
     }

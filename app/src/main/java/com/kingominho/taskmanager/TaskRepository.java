@@ -22,29 +22,24 @@ public class TaskRepository {
     }
 
 
-
     public void setUserIdAndCategory(int userId, String category) {
         this.userId = userId;
         this.category = category;
         allTasks = taskDao.getAllTasks(this.userId);
-        allisCompletedTrueTasks = taskDao.getAllTasks(this.userId, this.category,1);
-        allisCompletedFalseTasks = taskDao.getAllTasks(this.userId, this.category,0);
+        allisCompletedTrueTasks = taskDao.getAllTasks(this.userId, this.category, 1);
+        allisCompletedFalseTasks = taskDao.getAllTasks(this.userId, this.category, 0);
     }
 
 
-
-    public void insert(Task task)
-    {
+    public void insert(Task task) {
         new InsertTaskAsyncTask(taskDao).execute(task);
     }
 
-    public void update(Task task)
-    {
+    public void update(Task task) {
         new UpdateTaskAsyncTask(taskDao).execute(task);
     }
 
-    public void delete(Task task)
-    {
+    public void delete(Task task) {
         new DeleteTaskAsyncTask(taskDao).execute(task);
     }
 
@@ -56,11 +51,9 @@ public class TaskRepository {
         return allisCompletedFalseTasks;
     }
 
-    public LiveData<List<Task>> getAllTasks()
-    {
+    public LiveData<List<Task>> getAllTasks() {
         return allTasks;
     }
-
 
 
     private static class InsertTaskAsyncTask extends AsyncTask<Task, Void, Void> {

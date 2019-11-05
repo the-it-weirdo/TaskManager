@@ -137,8 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
             User user = new User(name, password, email);
 
 
-            if(userViewModel.isDuplicateUser(email))
-            {
+            if (userViewModel.isDuplicateUser(email)) {
                 Toast.makeText(getApplicationContext(), "User already exists!\n" +
                         "Duplicate email. Please try logging in.", Toast.LENGTH_SHORT).show();
                 return;

@@ -15,10 +15,11 @@ public abstract class DataBase extends RoomDatabase {
     private static DataBase instance;
 
     public abstract TaskDao taskDao();
+
     public abstract UserDao userDao();
 
     public static synchronized DataBase getInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     DataBase.class, "task_manager_database")
                     .fallbackToDestructiveMigration()
@@ -42,8 +43,7 @@ public abstract class DataBase extends RoomDatabase {
 
         private TaskDao taskDao;
 
-        private PopulateTaskDbAsyncTask(DataBase dataBase)
-        {
+        private PopulateTaskDbAsyncTask(DataBase dataBase) {
             this.taskDao = dataBase.taskDao();
         }
 
@@ -67,8 +67,7 @@ public abstract class DataBase extends RoomDatabase {
 
         private UserDao userDao;
 
-        private PopulateUserDbAsyncTask(DataBase dataBase)
-        {
+        private PopulateUserDbAsyncTask(DataBase dataBase) {
             this.userDao = dataBase.userDao();
         }
 
