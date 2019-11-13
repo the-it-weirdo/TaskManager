@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewCategory">
+    tools:context=".ViewCategory"
+    android:id="@+id/coordinatorLayoutViewCategory">
 
     <include layout="@layout/view_category_include" />
 

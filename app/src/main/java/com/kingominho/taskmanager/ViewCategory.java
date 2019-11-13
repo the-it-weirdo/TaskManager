@@ -184,7 +184,7 @@ public class ViewCategory extends AppCompatActivity {
             taskViewModel.insert(task);
 
             //Toast.makeText(getApplicationContext(), "Task created.", Toast.LENGTH_SHORT).show();
-            Snackbar.make(getCurrentFocus(), "Task created!", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.coordinatorLayoutViewCategory), "Task created!", Snackbar.LENGTH_SHORT).show();
         }
     }
 
