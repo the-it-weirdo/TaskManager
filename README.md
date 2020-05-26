@@ -26,7 +26,7 @@
 </table>
 
 ## About
-- The app is a simple to-do app where users can maintain their tasks.
+- It is a simple to-do app where users can maintain their tasks.
 - Tasks can be categorized into 2 different categories viz. Home & Work.
 - Users can sign up in the app using their email.
 - The app stores data locally.
